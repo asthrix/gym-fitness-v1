@@ -1,3 +1,5 @@
+import { StaticImageData } from "next/image";
+
 export interface SocialLinks {
    instagram?: string;
    twitter?: string;
@@ -10,7 +12,7 @@ export interface Trainer {
    name: string;
    specialty: string;
    bio: string;
-   image: string;
+   image: string | StaticImageData;
    role?: string;
    socialLinks: SocialLinks;
 }
@@ -25,7 +27,7 @@ export interface GymClass {
    id: string;
    title: string;
    description: string;
-   image: string;
+   image: string | StaticImageData;
    duration: string;
    intensity: "Beginner" | "Intermediate" | "Advanced";
    category: string;
@@ -33,7 +35,7 @@ export interface GymClass {
    trainer: {
       id: string;
       name: string;
-      image: string;
+      image: string | StaticImageData;
    };
    benefits?: string[];
    requirements?: string[];
@@ -45,14 +47,14 @@ export interface Testimonial {
    quote: string;
    name: string;
    title: string;
-   image: string;
+   image: string | StaticImageData;
 }
 
 // Facility Types
 export interface Facility {
    id: string;
    title: string;
-   image: string;
+   image: string | StaticImageData;
 }
 
 // Pricing Types

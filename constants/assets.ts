@@ -7,58 +7,66 @@
  * Example: HERO_BACKGROUND_IMAGE, LOGO_PRIMARY_SVG, etc.
  */
 
+import { Images } from "@/assets/images";
+import { VideoSrc } from "@/assets/Video";
+
 // Logo assets
 export const LOGO_PRIMARY_SVG = "/logo/logo-primary.svg";
 export const LOGO_WHITE_SVG = "/logo/logo-white.svg";
 export const LOGO_SMALL_SVG = "/logo/logo-small.svg";
 
-// Hero section assets
-export const HERO_BACKGROUND_IMAGE = "/images/hero/hero-background.jpg";
-export const HERO_VIDEO_MP4 = "/videos/hero-background.mp4";
+// Hero section assets - using imported images and videos
+export const HERO_BACKGROUND_IMAGE = Images.hero;
+export const HERO_VIDEO_MP4 = VideoSrc.hero;
 
-// Class images
-export const CLASS_DEFAULT_IMAGE = "/images/classes/class-default.jpg";
-export const CLASS_HIIT_IMAGE = "/images/classes/hiit-training.jpg";
-export const CLASS_STRENGTH_IMAGE = "/images/classes/strength-conditioning.jpg";
-export const CLASS_YOGA_IMAGE = "/images/classes/yoga-flow.jpg";
-export const CLASS_SPIN_IMAGE = "/images/classes/spin-class.jpg";
-export const CLASS_BOXING_IMAGE = "/images/classes/boxing-fundamentals.jpg";
-export const CLASS_PILATES_IMAGE = "/images/classes/pilates-core.jpg";
-export const CLASS_FUNCTIONAL_IMAGE = "/images/classes/functional-training.jpg";
-export const CLASS_CROSSFIT_IMAGE = "/images/classes/crossfit-inspired.jpg";
+// Class videos
+export const CLASS_DEFAULT_VIDEO = VideoSrc.classes;
+export const CLASS_TRAINING_VIDEO = VideoSrc.training;
+export const CLASS_WORKOUT_VIDEO = VideoSrc.workout;
+export const CLASS_FITNESS_VIDEO = VideoSrc.fitness;
 
-// Trainer images
-export const TRAINER_DEFAULT_IMAGE = "/images/trainers/trainer-default.jpg";
-export const TRAINER_ALEX_IMAGE = "/images/trainers/alex-johnson.jpg";
-export const TRAINER_SARAH_IMAGE = "/images/trainers/sarah-miller.jpg";
-export const TRAINER_MICHAEL_IMAGE = "/images/trainers/michael-chen.jpg";
-export const TRAINER_EMMA_IMAGE = "/images/trainers/emma-rodriguez.jpg";
+// Class images - using imported images
+export const CLASS_DEFAULT_IMAGE = Images.classes.hiit; // Using HIIT as default
+export const CLASS_HIIT_IMAGE = Images.classes.hiit;
+export const CLASS_STRENGTH_IMAGE = Images.classes.powerLifting;
+export const CLASS_YOGA_IMAGE = Images.classes.yoga;
+export const CLASS_SPIN_IMAGE = Images.classes.hiit; // Reusing HIIT for spin
+export const CLASS_BOXING_IMAGE = Images.classes.crossfit; // Reusing crossfit for boxing
+export const CLASS_PILATES_IMAGE = Images.classes.pilates;
+export const CLASS_FUNCTIONAL_IMAGE = Images.classes.powerLifting; // Reusing powerLifting for functional
+export const CLASS_CROSSFIT_IMAGE = Images.classes.crossfit;
 
-// Facility images
-export const FACILITY_GYM_FLOOR_IMAGE = "/images/facilities/gym-floor.jpg";
-export const FACILITY_CARDIO_AREA_IMAGE = "/images/facilities/cardio-area.jpg";
-export const FACILITY_WEIGHT_ROOM_IMAGE = "/images/facilities/weight-room.jpg";
-export const FACILITY_YOGA_STUDIO_IMAGE = "/images/facilities/yoga-studio.jpg";
-export const FACILITY_POOL_IMAGE = "/images/facilities/pool.jpg";
-export const FACILITY_LOCKER_ROOM_IMAGE = "/images/facilities/locker-room.jpg";
+// Trainer images - using imported images
+export const TRAINER_DEFAULT_IMAGE = Images.trainers.john;
+export const TRAINER_ALEX_IMAGE = Images.trainers.john;
+export const TRAINER_SARAH_IMAGE = Images.trainers.sarah;
+export const TRAINER_MICHAEL_IMAGE = Images.trainers.michael;
+export const TRAINER_EMMA_IMAGE = Images.trainers.emma;
+
+// Facility images - using gallery and other images
+export const FACILITY_GYM_FLOOR_IMAGE = Images.gallery[0];
+export const FACILITY_CARDIO_AREA_IMAGE = Images.gallery[1];
+export const FACILITY_WEIGHT_ROOM_IMAGE = Images.gallery[2];
+export const FACILITY_YOGA_STUDIO_IMAGE = Images.classes.yoga;
+export const FACILITY_POOL_IMAGE = Images.gallery[0]; // Reusing gallery image
+export const FACILITY_LOCKER_ROOM_IMAGE = Images.equipment; // Reusing equipment image
 
 // Testimonial images
-export const TESTIMONIAL_DEFAULT_IMAGE =
-   "/images/testimonials/testimonial-default.jpg";
+export const TESTIMONIAL_DEFAULT_IMAGE = Images.trainers.john;
 
 // About page images
-export const ABOUT_HERO_IMAGE = "/images/about/about-hero.jpg";
-export const ABOUT_MISSION_IMAGE = "/images/about/our-mission.jpg";
-export const ABOUT_TEAM_IMAGE = "/images/about/our-team.jpg";
+export const ABOUT_HERO_IMAGE = Images.hero;
+export const ABOUT_MISSION_IMAGE = Images.classes.yoga;
+export const ABOUT_TEAM_IMAGE = Images.gallery[1];
 
 // Contact page images
-export const CONTACT_HERO_IMAGE = "/images/contact/contact-hero.jpg";
+export const CONTACT_HERO_IMAGE = Images.gallery[2];
 
 // Pricing page images
-export const PRICING_HERO_IMAGE = "/images/pricing/pricing-hero.jpg";
+export const PRICING_HERO_IMAGE = Images.classes.powerLifting;
 
 // Classes page images
-export const CLASSES_HERO_IMAGE = "/images/classes/classes-hero.jpg";
+export const CLASSES_HERO_IMAGE = Images.classes.hiit;
 
 // Default placeholder images with dimensions
 export const getPlaceholder = (width: number, height: number) =>
@@ -120,7 +128,7 @@ export const FACILITY_IMAGES = {
  * Helper function to get an image based on ID from a map
  * Falls back to the default image if the ID is not found
  */
-export const getImageById = (id: string, imageMap: Record<string, string>) => {
+export const getImageById = (id: string, imageMap: Record<string, any>) => {
    return imageMap[id] || imageMap.default;
 };
 

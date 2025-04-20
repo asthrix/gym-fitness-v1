@@ -1,38 +1,22 @@
-import Image from "next/image";
 import { SectionContainer } from "@/components/sections/SectionContainer";
 import { PricingCard } from "@/components/sections/PricingCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CTA } from "@/components/common/CTA";
+import { PageHero } from "@/components/sections/PageHero";
 import { Check } from "lucide-react";
 import { monthlyPlans, annualPlans } from "@/data/pricing";
+import { PRICING_HERO_IMAGE } from "@/constants/assets";
+import { Images } from "@/assets/images";
 
 export default function PricingPage() {
    return (
       <>
          {/* Hero Section */}
-         <section className='relative py-24 md:py-32  overflow-hidden noise-overlay'>
-            <div className='absolute inset-0 z-0'>
-               <Image
-                  src='/placeholder.svg?height=1080&width=1920'
-                  alt='Gym Pricing'
-                  fill
-                  className='object-cover opacity-40'
-                  priority
-               />
-               <div className='absolute inset-0 bg-gradient-to-b from-black/60 to-black' />
-            </div>
-
-            <div className='container mx-auto px-4 relative z-10'>
-               <div className='max-w-3xl mx-auto text-center'>
-                  <h1 className='text-5xl md:text-6xl font-heading mb-6 text-foreground'>
-                     MEMBERSHIP PLANS
-                  </h1>
-                  <p className='text-xl md:text-2xl text-muted-foreground'>
-                     Choose the perfect plan to achieve your fitness goals
-                  </p>
-               </div>
-            </div>
-         </section>
+         <PageHero
+            title='MEMBERSHIP PLANS'
+            subtitle='Choose the perfect plan to achieve your fitness goals'
+            backgroundImage={PRICING_HERO_IMAGE || Images.classes.powerLifting}
+         />
 
          {/* Pricing Section */}
          <SectionContainer className=''>

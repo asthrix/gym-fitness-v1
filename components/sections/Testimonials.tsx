@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { motion, useInView } from "framer-motion";
 import { Quote } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -11,7 +11,7 @@ interface Testimonial {
    quote: string;
    name: string;
    title: string;
-   image: string;
+   image: string | StaticImageData;
 }
 
 interface TestimonialsProps {

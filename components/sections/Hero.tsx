@@ -2,10 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { HERO_BACKGROUND_IMAGE, HERO_VIDEO_MP4 } from "@/constants/assets";
+import { StaticImageData } from "next/image";
 
 interface HeroProps {
    title: string;
@@ -13,6 +15,7 @@ interface HeroProps {
    ctaText: string;
    ctaLink: string;
    videoSrc?: string;
+   backgroundImage?: string | StaticImageData;
 }
 
 export function Hero({
@@ -21,6 +24,7 @@ export function Hero({
    ctaText = "Join now",
    ctaLink = "/pricing",
    videoSrc = HERO_VIDEO_MP4,
+   backgroundImage = HERO_BACKGROUND_IMAGE,
 }: HeroProps) {
    const ref = useRef(null);
    const isInView = useInView(ref, { once: true });
@@ -54,32 +58,52 @@ export function Hero({
 
    return (
       <section className='relative min-h-screen flex items-center justify-center overflow-hidden noise-overlay'>
-         {/* Video Background */}
+         {/* Video or Image Background */}
          {videoSrc ? (
-            <video
-               autoPlay
-               muted
-               loop
-               playsInline
-               className='video-background'
-               poster={HERO_BACKGROUND_IMAGE}
-            >
-               <source src={videoSrc} type='video/mp4' />
-            </video>
+            <div className='absolute inset-0 w-full h-full'>
+               <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className='absolute inset-0 w-full h-full object-cover'
+                  poster={
+                     typeof backgroundImage === "string"
+                        ? backgroundImage
+                        : undefined
+                  }
+               >
+                  <source src={videoSrc} type='video/mp4' />
+               </video>
+            </div>
          ) : (
-            <div
-               className='absolute inset-0 bg-cover bg-center bg-no-repeat'
-               style={{
-                  backgroundImage: `url('${HERO_BACKGROUND_IMAGE}')`,
-               }}
-            />
+            <div className='absolute inset-0 w-full h-full'>
+               {typeof backgroundImage === "string" ? (
+                  <div
+                     className='absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat'
+                     style={{
+                        backgroundImage: `url('${backgroundImage}')`,
+                     }}
+                  />
+               ) : (
+                  <Image
+                     src={backgroundImage}
+                     alt='Background'
+                     fill
+                     sizes='100vw'
+                     className='object-cover'
+                     priority
+                     quality={90}
+                  />
+               )}
+            </div>
          )}
 
          {/* Gradient Overlay */}
-         <div className='gradient-overlay' />
+         <div className='absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70 z-[1]' />
 
          {/* Content */}
-         <div className='container mx-auto px-4 z-10 py-20 md:py-0'>
+         <div className='container mx-auto px-4 z-10 py-20 md:py-0 relative '>
             <motion.div
                ref={ref}
                className='max-w-3xl mx-auto text-center'

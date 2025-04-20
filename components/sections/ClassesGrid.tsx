@@ -7,17 +7,18 @@ import { motion, useInView } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import { StaticImageData } from "next/image";
 
 export interface GymClass {
    id: string;
    title: string;
    description: string;
-   image: string;
+   image: string | StaticImageData;
    duration: string;
    intensity: "Beginner" | "Intermediate" | "Advanced";
    trainer: {
       name: string;
-      image: string;
+      image: string | StaticImageData;
    };
 }
 

@@ -3,8 +3,8 @@
 import type React from "react";
 
 import { useState } from "react";
-import Image from "next/image";
 import { SectionContainer } from "@/components/sections/SectionContainer";
+import { PageHero } from "@/components/sections/PageHero";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -17,6 +17,8 @@ import {
 } from "@/components/ui/select";
 import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
 import { toast } from "sonner";
+import { Images } from "@/assets/images";
+import { CONTACT_HERO_IMAGE } from "@/constants/assets";
 
 export default function ContactPage() {
    const [formData, setFormData] = useState({
@@ -71,29 +73,11 @@ export default function ContactPage() {
    return (
       <>
          {/* Hero Section */}
-         <section className='relative py-24 md:py-32  overflow-hidden noise-overlay'>
-            <div className='absolute inset-0 z-0'>
-               <Image
-                  src='/placeholder.svg?height=1080&width=1920'
-                  alt='Contact Us'
-                  fill
-                  className='object-cover opacity-40'
-                  priority
-               />
-               <div className='absolute inset-0 bg-gradient-to-b from-black/60 to-black' />
-            </div>
-
-            <div className='container mx-auto px-4 relative z-10'>
-               <div className='max-w-3xl mx-auto text-center'>
-                  <h1 className='text-5xl md:text-6xl font-heading mb-6 text-foreground'>
-                     CONTACT US
-                  </h1>
-                  <p className='text-xl md:text-2xl text-muted-foreground'>
-                     Get in touch with our team for any questions or inquiries
-                  </p>
-               </div>
-            </div>
-         </section>
+         <PageHero
+            title='CONTACT US'
+            subtitle='Get in touch with our team for any questions or inquiries'
+            backgroundImage={CONTACT_HERO_IMAGE || Images.gallery[2]}
+         />
 
          {/* Contact Form and Info Section */}
          <SectionContainer className=''>

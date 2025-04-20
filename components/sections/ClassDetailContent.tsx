@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { SectionContainer } from "@/components/sections/SectionContainer";
@@ -13,9 +13,23 @@ import {
    DialogTitle,
    DialogDescription,
 } from "@/components/ui/dialog";
-import { Calendar, Clock, User, ChevronLeft, CalendarIcon } from "lucide-react";
+import {
+   Calendar,
+   Clock,
+   User,
+   ChevronLeft,
+   CalendarIcon,
+   Play,
+   Pause,
+} from "lucide-react";
 import { ClassBookingForm } from "@/components/sections/ClassBookingForm";
 import { classesData } from "@/data/classes";
+import {
+   CLASS_DEFAULT_VIDEO,
+   CLASS_TRAINING_VIDEO,
+   CLASS_WORKOUT_VIDEO,
+   CLASS_FITNESS_VIDEO,
+} from "@/constants/assets";
 
 interface ClassDetailContentProps {
    gymClass: (typeof classesData)[0];
@@ -23,6 +37,35 @@ interface ClassDetailContentProps {
 
 export function ClassDetailContent({ gymClass }: ClassDetailContentProps) {
    const [isBookingOpen, setIsBookingOpen] = useState(false);
+   const [isPlaying, setIsPlaying] = useState(false);
+   const videoRef = useRef<HTMLVideoElement>(null);
+
+   // Determine which video to use based on class category
+   const getVideoForClass = () => {
+      switch (gymClass.category.toLowerCase()) {
+         case "cardio":
+            return CLASS_FITNESS_VIDEO;
+         case "strength":
+            return CLASS_TRAINING_VIDEO;
+         case "mind & body":
+            return CLASS_WORKOUT_VIDEO;
+         case "combat":
+            return CLASS_TRAINING_VIDEO;
+         default:
+            return CLASS_DEFAULT_VIDEO;
+      }
+   };
+
+   const togglePlayPause = () => {
+      if (videoRef.current) {
+         if (isPlaying) {
+            videoRef.current.pause();
+         } else {
+            videoRef.current.play();
+         }
+         setIsPlaying(!isPlaying);
+      }
+   };
 
    return (
       <>
@@ -102,6 +145,39 @@ export function ClassDetailContent({ gymClass }: ClassDetailContentProps) {
                   <p className='text-muted-foreground mb-8'>
                      {gymClass.description}
                   </p>
+
+                  {/* Class Preview Video */}
+                  <div className='relative aspect-video mb-10 rounded-lg overflow-hidden'>
+                     <video
+                        ref={videoRef}
+                        className='w-full h-full object-cover'
+                        poster={
+                           typeof gymClass.image === "string"
+                              ? gymClass.image
+                              : undefined
+                        }
+                        onEnded={() => setIsPlaying(false)}
+                     >
+                        <source src={getVideoForClass()} type='video/mp4' />
+                        Your browser does not support the video tag.
+                     </video>
+                     <div
+                        className={`absolute inset-0 bg-black/30 flex items-center justify-center cursor-pointer transition-opacity ${
+                           isPlaying
+                              ? "opacity-0 hover:opacity-100"
+                              : "opacity-100"
+                        }`}
+                        onClick={togglePlayPause}
+                     >
+                        <div className='bg-primary/80 hover:bg-primary p-4 rounded-full'>
+                           {isPlaying ? (
+                              <Pause className='h-8 w-8 text-white' />
+                           ) : (
+                              <Play className='h-8 w-8 text-white' />
+                           )}
+                        </div>
+                     </div>
+                  </div>
 
                   <h3 className='text-2xl font-heading mb-4 text-foreground'>
                      Benefits

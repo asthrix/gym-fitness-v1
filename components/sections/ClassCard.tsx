@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
@@ -18,7 +18,7 @@ interface GymClass {
    id: string;
    title: string;
    description: string;
-   image: string;
+   image: string | StaticImageData;
    duration: string;
    intensity: "Beginner" | "Intermediate" | "Advanced";
    category: string;
@@ -26,7 +26,7 @@ interface GymClass {
    trainer: {
       id: string;
       name: string;
-      image: string;
+      image: string | StaticImageData;
    };
 }
 

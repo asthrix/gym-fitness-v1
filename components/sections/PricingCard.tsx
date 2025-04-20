@@ -12,6 +12,7 @@ interface PricingCardProps {
 }
 
 export function PricingCard({ plan, isYearly = false }: PricingCardProps) {
+   console.log(isYearly);
    return (
       <div
          className={`rounded-lg p-0.5 ${

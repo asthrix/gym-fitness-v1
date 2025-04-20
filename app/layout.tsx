@@ -4,7 +4,8 @@ import "./globals.css";
 import { Header } from "@/components/common/Header";
 import { Footer } from "@/components/common/Footer";
 import Providers from "@/components/providers/Providers";
-import { bebasNeue, inter } from "@/utils/fonts";
+import { bebasNeue, inter } from "@/assets/fonts";
+// import { bebasNeue, inter } from "@/utils/fonts";
 
 // Load Inter font for body text
 
@@ -27,6 +28,34 @@ export const metadata: Metadata = {
       "classes",
       "health",
    ],
+   icons: {
+      icon: "/favicon.ico",
+      shortcut: "/favicon.ico",
+      apple: "/apple-icon.png",
+   },
+   openGraph: {
+      title: "Gymon | Transform Your Life With Fitness",
+      description:
+         "Join us to achieve your fitness goals with our state-of-the-art facilities, expert trainers, and supportive community.",
+      images: [
+         {
+            // url: HERO_BACKGROUND_IMAGE,
+            url: "",
+            width: 1200,
+            height: 630,
+            alt: "Gymon Fitness Center",
+         },
+      ],
+      locale: "en_US",
+      type: "website",
+   },
+   twitter: {
+      card: "summary_large_image",
+      title: "Gymon | Transform Your Life With Fitness",
+      description:
+         "Join us to achieve your fitness goals with our state-of-the-art facilities, expert trainers, and supportive community.",
+      // images: [HERO_BACKGROUND_IMAGE],
+   },
 };
 
 export default function RootLayout({
@@ -42,7 +71,7 @@ export default function RootLayout({
             <Providers>
                <div className='flex min-h-screen flex-col'>
                   <Header />
-                  <main className='flex-1'>{children}</main>
+                  <main className='flex-grow'>{children}</main>
                   <Footer />
                </div>
             </Providers>

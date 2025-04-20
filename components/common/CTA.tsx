@@ -2,9 +2,11 @@
 
 import { useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { StaticImageData } from "next/image";
 
 interface CTAProps {
    title?: string;
@@ -14,6 +16,7 @@ interface CTAProps {
    secondaryButtonText?: string;
    secondaryButtonLink?: string;
    className?: string;
+   backgroundImage?: string | StaticImageData;
 }
 
 export function CTA({
@@ -24,6 +27,7 @@ export function CTA({
    secondaryButtonText = "Learn More",
    secondaryButtonLink = "/about",
    className,
+   backgroundImage,
 }: CTAProps) {
    const ref = useRef(null);
    const isInView = useInView(ref, { once: true, amount: 0.5 });
@@ -36,6 +40,26 @@ export function CTA({
             className
          )}
       >
+         {/* Background Image */}
+         {backgroundImage && (
+            <div className='absolute inset-0 z-0'>
+               {typeof backgroundImage === "string" ? (
+                  <div
+                     className='w-full h-full bg-cover bg-center opacity-20'
+                     style={{ backgroundImage: `url(${backgroundImage})` }}
+                  />
+               ) : (
+                  <Image
+                     src={backgroundImage}
+                     alt='Background'
+                     fill
+                     className='object-cover opacity-20'
+                  />
+               )}
+               <div className='absolute inset-0 bg-gradient-to-r from-gray-900 to-black opacity-80' />
+            </div>
+         )}
+
          <div className='container mx-auto px-4 relative z-10'>
             <motion.div
                className='max-w-3xl mx-auto text-center'

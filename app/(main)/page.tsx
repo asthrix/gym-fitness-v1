@@ -5,6 +5,7 @@ import { Testimonials } from "@/components/sections/Testimonials";
 import { CTA } from "@/components/common/CTA";
 import { featuredClasses } from "@/data/classes";
 import { testimonials } from "@/data/testimonials";
+import { HERO_VIDEO_MP4, HERO_BACKGROUND_IMAGE } from "@/constants/assets";
 
 export default function Home() {
    return (
@@ -14,6 +15,8 @@ export default function Home() {
             subtitle='Join us to achieve your fitness goals with our state-of-the-art facilities, expert trainers, and supportive community.'
             ctaText='Join now'
             ctaLink='/pricing'
+            videoSrc={HERO_VIDEO_MP4}
+            backgroundImage={HERO_BACKGROUND_IMAGE}
          />
 
          <Features />
